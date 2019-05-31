@@ -7,6 +7,8 @@ public class FrisbeeController : MonoBehaviour
 {
     [SerializeField] float risePower = 50f;
     [SerializeField] float rotatePower= 80f;
+    [SerializeField] ParticleSystem successParticle;
+    [SerializeField] ParticleSystem outParticle;
     Rigidbody rigidBody;
 
     void Start()
@@ -20,6 +22,7 @@ public class FrisbeeController : MonoBehaviour
         RotateObjInput();
     }
 
+    //フリスビーを上昇させる
     private void RiseObjInput()
     {
         if(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
@@ -28,6 +31,7 @@ public class FrisbeeController : MonoBehaviour
         }
     }
 
+    //フリスビーを操作
     private void RotateObjInput()
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -47,11 +51,27 @@ public class FrisbeeController : MonoBehaviour
             Debug.Log("なんもしない");
         }else if(collision.gameObject.tag == "Success")
         {
-            Debug.Log("クリア");
+            SuccessProcessing();
         }
         else
         {
-            Debug.Log("アウト");
+            OutProcessing();
         }
     }
+
+    private void SuccessProcessing()
+    {
+        successParticle.Play();
+    }
+
+    private void OutProcessing()
+    {
+        outParticle.Play();
+    }
+
+
+
+
+
+
 }
