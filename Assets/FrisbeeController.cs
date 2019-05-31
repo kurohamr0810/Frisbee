@@ -38,6 +38,20 @@ public class FrisbeeController : MonoBehaviour
         {
             transform.Rotate(-Vector3.forward * rotatePower * Time.deltaTime);
         }
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
+       if(collision.gameObject.tag == "Safety")
+        {
+            Debug.Log("なんもしない");
+        }else if(collision.gameObject.tag == "Success")
+        {
+            Debug.Log("クリア");
+        }
+        else
+        {
+            Debug.Log("アウト");
+        }
     }
 }
