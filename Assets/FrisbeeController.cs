@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FrisbeeController : MonoBehaviour
 {
@@ -62,6 +63,24 @@ public class FrisbeeController : MonoBehaviour
     private void SuccessProcessing()
     {
         successParticle.Play();
+        Invoke("LoadActiveStage", 2f);
+    }
+
+    private void LoadNextStage()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if(nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    private void LoadActiveStage()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void OutProcessing()
